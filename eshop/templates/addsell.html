@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{result}}
+<form method="post" action="/addsell">
+    {% for item in box %}
+    {% csrf_token %}
+    销售单号
+    <input type="text" name="sell_id" value="{{box.return_id}}">
+    <br>
+    商品编号
+    <input type="text" name="goods_id">
+    <br>
+    销售价格
+    <input type="text" name="sell_price">
+    <br>
+    销售数量
+    <input type="text" name="sell_num">
+    <br>
+    顾客id
+    <input type="text" name="customer_id">
+    <br>
+    销售员id
+    <input type="text" name="seller_id">
+    <br>
+    销售日期
+    <input type="datetime-local" name="sell_time">
+    <br>
+    <select name="sell_statement">
+        <option value="done">完成</option>
+        <option value="ready">草拟</option>
+        <option value="doing">执行</option>
+        <option value="cancle">取消</option>
+    </select>
+    <br>
+    <input type="submit" value="提交">
+    {% endfor %}
+</form>
+</body>
+</html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 import pymysql
 
 
@@ -111,9 +111,78 @@ def returngoods(request):
         sell_id = request.POST['sell_id']
         sql = "insert into returngoods values (%s,%s,%s,%s,%s,%s,0.00)"
         cursor.execute(sql, [return_id,goods_id,return_num,return_reason,return_time,sell_id])
+        db.commit()
         context['result']="成功提交退货"
         context['box']={'return_id':''}
     else:
         context['result'] = "请输入退货单数据"
         context['box'] = {'return_id':''}
     return render(request, 'returngoods.html', context)
+
+
+def modifysell(request,sell_id):
+    db = pymysql.connect("localhost", "testuser", "PlayStation5", "eshop", port=3306,
+                         cursorclass=pymysql.cursors.DictCursor)
+    cursor = db.cursor()
+    context = {}
+    if request.POST:
+        sell_id=request.POST['sell_id']
+        goods_id=request.POST['goods_id']
+        sell_price=request.POST['sell_price']
+        sell_num=request.POST['sell_num']
+        customer_id=request.POST['customer_id']
+        seller_id=request.POST['selller_id']
+        sql = " update sell_detail set sell_price=%s,sell_num=%s,customer_id=%s,seller_id=%s where sell_id=%s and goods_id=%s"
+        cursor.execute(sql, [sell_price,sell_num,customer_id,seller_id,sell_id,goods_id])
+        sql2="select * from sell_detail where sell_id=%s"
+        cursor.execute(sql2, sell_id)
+        data = cursor.fetchall()
+        db.commit()
+        context['result']="成功修改"
+        context['sells']=data
+    else:
+        context['result'] = "请谨慎修改"
+        sql3 = "select * from sell_detail where sell_id=%s"
+        cursor.execute(sql3,sell_id)
+        data2=cursor.fetchall()
+        context['sells']=data2
+
+    return render(request, 'modifysell.html', context)
+
+def deletesell(request,sell_id):
+    db = pymysql.connect("localhost", "testuser", "PlayStation5", "eshop", port=3306,
+                         cursorclass=pymysql.cursors.DictCursor)
+    cursor = db.cursor()
+    context = {}
+    sql="delete from sell_detail where sell_id=%s"
+    cursor.execute(sql,sell_id)
+    db.commit()
+
+    return redirect('/show_all_sell')
+
+
+def addsell(request):
+    db = pymysql.connect("localhost", "testuser", "PlayStation5", "eshop", port=3306,
+                         cursorclass=pymysql.cursors.DictCursor)
+    cursor = db.cursor()
+    context = {}
+    if request.POST:
+        sell_id = request.POST['sell_id']
+        goods_id = request.POST['goods_id']
+        sell_price = request.POST['sell_price']
+        sell_num = request.POST['sell_num']
+        customer_id = request.POST['customer_id']
+        sell_time= request.POST['sell_time']
+        seller_id = request.POST['seller_id']
+        sell_statement= request.POST['sell_statement']
+        sql = "insert into sell values (%s,%s,%s)"
+        cursor.execute(sql, [sell_id,sell_time,sell_statement])
+        sql2="insert into sell_detail values(%s,%s,%s,%s,%s,%s)"
+        cursor.execute(sql2,[sell_id,goods_id,sell_price,sell_num,customer_id,seller_id])
+        db.commit()
+        context['result']="成功提交销售单"
+        context['box'] = {'return_id': ''}
+    else:
+        context['result'] = "请输入销售单信息"
+        context['box'] = {'return_id':''}
+    return render(request, 'addsell.html', context)

@@ -43,7 +43,9 @@
         <td>{{item.customer_id}}</td>
         <td>{{item.seller_id}}</td>
         <td>{{item.sell_time}}</td>
-        <td>{{item.sell_statement}}</td>
+        <td>{{item.sell_statement}}
+        <td> <a href="{% url 'modifysell' item.sell_id %}">修改</a></td>
+        <td> <a href="{% url 'deletesell' item.sell_id %}">删除</a></td>
     </tr>
     {% endfor %}
 </table>
