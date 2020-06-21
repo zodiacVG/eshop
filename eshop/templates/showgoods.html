@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/allgoods" >
+    {% csrf_token %}
+    输入商品id:
+    <input type="text" name="goods_id">
+    <input type="submit" value="搜索">
+    <!--输入订单号:-->
+    <!--<input type="text" name="sell_id">-->
+    <!--<input type="submit" value="搜索">-->
+    <!--输入顾客id：-->
+    <!--<input type="text" name="customer_id">-->
+    <!--<input type="submit" value="搜索">-->
+    <!--输入销售员id-->
+    <!--<input type="text" name="seller_id">-->
+    <!--<input type="submit" value="搜索">-->
+</form>
+
+<table border="1" style="margin: 0 auto;text-align: center;">
+    <tr>
+        <th>商品id</th>
+        <th>商品名称</th>
+        <th>产地</th>
+        <th>描述</th>
+        <th>进价</th>
+        <th>库存</th>
+        <th>种类</th>
+    </tr>
+    {% for item in goods %}
+    <tr>
+        <td>{{item.goods_id}}</td>
+        <td>{{item.goods_name}}</td>
+        <td>{{item.producing_area}}</td>
+        <td>{{item.description}}</td>
+        <td>{{item.import_price}}</td>
+        <td>{{item.reserve}}</td>
+        <td>{{item.category_name}}</td>
+        <td> <a href="{% url 'show_goods_sell' item.goods_id  %}">所有销售记录</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
