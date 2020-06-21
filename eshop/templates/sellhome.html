@@ -8,10 +8,22 @@
 <body>
 <h1>ZShop销售管理系统</h1>
 实时销售数据
-<form method="post" action="/sellhome">
+
+<table>
+    <tr>
+        <th>热门商品</th>
+    </tr>
+    {% for item in hits %}
+    <tr>
+        <td>{{item.goods_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<form method="post" action="/sellhome" style="display:none">
     {% csrf_token %}
     输入商品id:
-    <input type="text" name="goods_id">
+    <input type="text" name="goods_id" >
     <input type="submit" value="搜索">
     <!--输入订单号:-->
     <!--<input type="text" name="sell_id">-->
@@ -47,6 +59,7 @@
     </tr>
     {% endfor %}
 </table>
+
 
 
 </body>

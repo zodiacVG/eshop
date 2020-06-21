@@ -19,5 +19,9 @@ def show_sells(request):
     data = cursor.fetchall()
     context = {}
     context['sells'] = data
+    sql2="select goods_id from fullsell group by goods_id having count(*)>=1"
+    cursor.execute(sql2)
+    data2 = cursor.fetchall()
+    context['hits'] = data2
     return render(request, 'sellhome.html', context)
 
