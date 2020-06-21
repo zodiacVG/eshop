@@ -19,7 +19,16 @@
     </tr>
     {% endfor %}
 </table>
-
+<table>
+    <tr>
+        <th>冷门商品</th>
+    </tr>
+    {% for item in nbcs %}
+    <tr>
+        <td>{{item.goods_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
 <form method="post" action="/sellhome" style="display:none">
     {% csrf_token %}
     输入商品id:
