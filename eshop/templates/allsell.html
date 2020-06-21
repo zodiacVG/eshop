@@ -2,49 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>SellManage</title>
+    <title>Title</title>
 </head>
-
 <body>
-<h1>ZShop销售管理系统</h1>
-实时销售数据
 
-<table>
-    <tr>
-        <th>热门商品</th>
-    </tr>
-    {% for item in hits %}
-    <tr>
-        <td>{{item.goods_id}}</td>
-    </tr>
-    {% endfor %}
-</table>
-<table>
-    <tr>
-        <th>冷门商品</th>
-    </tr>
-    {% for item in nbcs %}
-    <tr>
-        <td>{{item.goods_id}}</td>
-    </tr>
-    {% endfor %}
-</table>
-<a href="/show_all_sell"><input type="button" value="查看所有商品"></a>
-<form method="post" action="/sellhome" style="display:none">
+<form method="post" action="/show_all_sell">
     {% csrf_token %}
-    输入商品id:
-    <input type="text" name="goods_id">
+    输入查询起始时间:
+    <input type="date" name="start_time">
+    输入查询结束时间：
+    <input type="date" name="end_time">
+    <!--开始选择起始终止时间-->
+
     <input type="submit" value="搜索">
-    <!--输入订单号:-->
-    <!--<input type="text" name="sell_id">-->
-    <!--<input type="submit" value="搜索">-->
     <!--输入顾客id：-->
     <!--<input type="text" name="customer_id">-->
-    <!--<input type="submit" value="搜索">-->
+    <!--<input type="submiet" value="搜索">-->
     <!--输入销售员id-->
     <!--<input type="text" name="seller_id">-->
     <!--<input type="submit" value="搜索">-->
 </form>
+
 <table border="1" style="margin: 0 auto;text-align: center;">
     <tr>
         <th>订单号</th>
@@ -69,7 +47,5 @@
     </tr>
     {% endfor %}
 </table>
-
-
 </body>
 </html>

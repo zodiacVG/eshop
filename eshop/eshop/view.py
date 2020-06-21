@@ -29,3 +29,20 @@ def show_sells(request):
     context['nbcs'] = data3
     return render(request, 'sellhome.html', context)
 
+
+def show_all_sell(request):
+    db = pymysql.connect("localhost", "testuser", "PlayStation5", "eshop", port=3306,
+                         cursorclass=pymysql.cursors.DictCursor)
+    cursor = db.cursor()
+    if request.POST:
+        start_time=request.POST['start_time']
+        end_time=request.POST['end_time']
+        sql = "select * from fullsell where sell_time between %s and %s"
+        cursor.execute(sql, [start_time,end_time])
+    else:
+        sql = "select * from fullsell "
+        cursor.execute(sql)
+    data = cursor.fetchall()
+    context = {}
+    context['sells'] = data
+    return render(request, 'allsell.html', context)

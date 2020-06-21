@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from . import view
+
 urlpatterns = [
     url(r'^sellhome$', view.show_sells),
+    url(r'^show_all_sell$', view.show_all_sell),
 ]
