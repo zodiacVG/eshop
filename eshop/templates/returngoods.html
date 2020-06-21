@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{result}}
+    <form method="post" action="/returngoods">
+    {% for item in box %}
+        {% csrf_token %}
+        退货单号：
+        <input type="text" name="return_id" value="{{box.return_id}}" >
+        <br>
+        退货商品id：
+        <input type="text" name="goods_name">
+        <br>
+        退货数量：
+        <input type="text" name="return_num">
+        <br>
+        退货原因
+        <input type="text" name="return_reason">
+        <br>
+        销售单号id
+        <input type="text" name="sell_id">
+        <br>
+        <input type="submit" value="提交">
+    {% endfor %}
+</form>
+</body>
+</html>

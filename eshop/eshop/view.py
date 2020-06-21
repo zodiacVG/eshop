@@ -95,3 +95,25 @@ def show_goods_sell(request,goods_id):
         context['num'] = data4
 
     return render(request, 'showgoodssell.html', context)
+
+
+def returngoods(request):
+    db = pymysql.connect("localhost", "testuser", "PlayStation5", "eshop", port=3306,
+                         cursorclass=pymysql.cursors.DictCursor)
+    cursor = db.cursor()
+    context = {}
+    if request.POST:
+        return_id=request.POST['return_id']
+        goods_id = request.POST['goods_id']
+        return_num = request.POST['return_num']
+        return_reason = request.POST['return_reason']
+        return_time = request.POST['return_time']
+        sell_id = request.POST['sell_id']
+        sql = "insert into returngoods values (%s,%s,%s,%s,%s,%s,0.00)"
+        cursor.execute(sql, [return_id,goods_id,return_num,return_reason,return_time,sell_id])
+        context['result']="成功提交退货"
+        context['box']={'return_id':''}
+    else:
+        context['result'] = "请输入退货单数据"
+        context['box'] = {'return_id':''}
+    return render(request, 'returngoods.html', context)
