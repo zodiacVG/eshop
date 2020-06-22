@@ -5,49 +5,53 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/show_goods_sell">
-    {% csrf_token %}
-    输入查询起始时间:
-    <input type="date" name="start_time">
-    输入查询结束时间：
-    <input type="date" name="end_time">
-    <!--开始选择起始终止时间-->
+<div style="background:linear-gradient(to left,#03A9F4,#B3E5FC);height: 200px">
+    <h1 align="center" style="line-height: 200px;font-family:">商品销售记录</h1>
+</div>
+<div>
+    <div style="text-align: center">
+        <form method="post" action="/show_goods_sell">
+            {% csrf_token %}
+            输入查询起始时间:
+            <input type="date" name="start_time">
+            输入查询结束时间：
+            <input type="date" name="end_time">
+            <!--开始选择起始终止时间-->
 
-    <input type="submit" value="搜索">
-    <!--输入顾客id：-->
-    <!--<input type="text" name="customer_id">-->
-    <!--<input type="submiet" value="搜索">-->
-    <!--输入销售员id-->
-    <!--<input type="text" name="seller_id">-->
-    <!--<input type="submit" value="搜索">-->
-</form>
-<table border="1" style="margin: 0 auto;text-align: center;">
-    <tr>
-        <th>订单号</th>
-        <th>商品id</th>
-        <th>销售单价</th>
-        <th>销售数量
-        <th>顾客id</th>
-        <th>销售员id</th>
-        <th>销售时间</th>
-        <th>订单状态</th>
-    </tr>
-    {% for item in sells %}
-    <tr>
-        <td>{{item.sell_id}}</td>
-        <td>{{item.goods_id}}</td>
-        <td>{{item.sell_price}}</td>
-        <td>{{item.sell_num}}</td>
-        <td>{{item.customer_id}}</td>
-        <td>{{item.seller_id}}</td>
-        <td>{{item.sell_time}}</td>
-        <td>{{item.sell_statement}}</td>
-    </tr>
+            <input type="submit" value="搜索">
+        </form>
+    </div>
+
+    <table border="1" style="margin: 0 auto;text-align: center;">
+        <tr>
+            <th>订单号</th>
+            <th>商品id</th>
+            <th>销售单价</th>
+            <th>销售数量
+            <th>顾客id</th>
+            <th>销售员id</th>
+            <th>销售时间</th>
+            <th>订单状态</th>
+        </tr>
+        {% for item in sells %}
+        <tr>
+            <td>{{item.sell_id}}</td>
+            <td>{{item.goods_id}}</td>
+            <td>{{item.sell_price}}</td>
+            <td>{{item.sell_num}}</td>
+            <td>{{item.customer_id}}</td>
+            <td>{{item.seller_id}}</td>
+            <td>{{item.sell_time}}</td>
+            <td>{{item.sell_statement}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <div style="text-align: center">
+    此段时间总销售量
+    {% for item in num %}
+    <text>{{item.num}}</text>
     {% endfor %}
-</table>
-此段时间总销售量
-{% for item in num %}
-<text>{{item.num}}</text>
-{% endfor %}
+    </div>
+</div>
 </body>
 </html>
