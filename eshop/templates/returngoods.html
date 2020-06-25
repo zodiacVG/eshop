@@ -3,14 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+         .addsell {
+            font-family: 腾讯体;
+            font-weight: bolder;
+            height: 35px;
+            font-size: 20px;
+            padding: 7px 14px 20px 14px;
+            margin: 10px 8px 7px 0;
+            display: inline-block;
+            color: black;
+            box-sizing: border-box;
+            border-radius: 4px;
+            background-color: #B3E5FC;
+            border: 1px solid #E4E7ED;
+            cursor: pointer;
+            transition: border 0.4s, color 0.4s;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body>
-<div style="background-color: #F1F1F1;height: 200px">
-    <h1 align="center" style="line-height: 200px;font-family: ">添加退货记录</h1>
+<div style="background:linear-gradient(to left,#03A9F4,#B3E5FC);height: 200px">
+    <h1 align="center" style="line-height: 150px;font-family: 腾讯体;padding-top: 30px;font-size: 50px;color: #323741;">添加退货记录</h1>
 
 </div>
 <div style="text-align: center">
-    {{result}}
+    <h2 style="font-family: 腾讯体;font-size: 30px;text-align: center;margin-top: 10px;">{{result}}</h2>
     <form method="post" action="/returngoods">
         {% for item in box %}
         {% csrf_token %}
@@ -29,7 +50,7 @@
         销售号id：
         <input type="text" name="sell_id">
         <br>
-        <input type="submit" value="提交">
+        <input type="submit" value="提交" class="addsell">
         {% endfor %}
     </form>
 </div>

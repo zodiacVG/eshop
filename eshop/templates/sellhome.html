@@ -5,11 +5,12 @@
     <title>SellManage</title>
     <style>
         .addsell {
-            font-family:本墨津黑;
+            font-family: 腾讯体;
+            font-weight: bolder;
             height: 62px;
             font-size: 30px;
-            padding:10px 14px 0px 14px;
-            margin:20px 8px 0px 0;
+            padding: 10px 14px 0px 14px;
+            margin: 20px 8px 0px 0;
             display: inline-block;
             color: black;
             box-sizing: border-box;
@@ -22,13 +23,25 @@
             position: relative;
             overflow: hidden;
         }
+
+        .hitice {
+            font-family: 腾讯体;
+            font-weight: bolder;
+            background;
+        }
+
+        .hittable {
+            border-radius: 10px;
+            width: 200px;
+            display: inline-block;
+        }
     </style>
 </head>
 
 <body>
 <div style="background:linear-gradient(to left,#03A9F4,#B3E5FC);height: 200px">
-    <h1 align="center" style="line-height: 150px;font-family: 腾讯体 "  >ZShop销售管理系统</h1>
-
+    <h1 align="center" style="line-height: 150px;font-family: 腾讯体;margin-bottom: 0px;font-size: 50px;color: #323741;">ZShop销售管理系统</h1>
+<h2 style="font-family: 'Young Sprime';text-align: center;margin-top: 0px">By Zodiac</h2>
 </div>
 <div class="main" style="margin-left: 10%;margin-right: 10%">
 
@@ -36,46 +49,77 @@
     <div style="float: left;width: 30%">
         <div style="margin-left: 50px">
             <a href="/addsell"><input type="button" value="新增销售单>>" class="addsell"></a>
-            <a href="/returngoods"><input type="button" value="退货>>" class="addsell" ></a>
+            <a href="/returngoods"><input type="button" value="退货>>" class="addsell"></a>
         </div>
-        <div style="margin-left: 50px;margin-top: 20px">
-            <table>
-                <tr>
-                    <th>热门商品</th>
 
-                    {% for item in hits %}
-                <tr>
-                    <td>{{item.goods_id}}</td>
-                    <td>{{item.goods_name}}</td>
-                    <td>总销量{{item.total_num}}</td>
 
-                </tr>
-                {% endfor %}
-            </table>
-            <table>
-                <tr>
-                    <th>冷门商品</th>
-                </tr>
-                {% for item in nbcs %}
-                <tr>
-                    <td>{{item.goods_id}}</td>
-                    <td>{{item.goods_name}}</td>
-                    <td>总销量{{item.total_num}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            <a href="/allgoods"><input type="button" value="查看所有商品>>"></a>
-        </div>
     </div>
     <div style="float: right;width: 65%">
+        <div style="margin-left: 0px;margin-top: 20px;width: 670px;background-color: antiquewhite; " class="hittable">
+            <div class="hittable" style="background-color: #03A9F4;margin-left: 13px;margin-top: 15px;">
+                <div style="margin: 15px">
+                    <table>
+                        <tr>
+                            <th class="hitice">热门商品</th>
+
+                            {% for item in hits %}
+                        <tr>
+                            <td>{{item.goods_id}}</td>
+                            <td>{{item.goods_name}}</td>
+                            <td>总销量{{item.total_num}}</td>
+
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="hittable" style="background-color: #E4E7ED">
+                <div style="margin: 15px">
+                    <table>
+                        <tr>
+                            <th class="hitice">冷门商品</th>
+                        </tr>
+                        {% for item in nbcs %}
+                        <tr>
+                            <td>{{item.goods_id}}</td>
+                            <td>{{item.goods_name}}</td>
+                            <td>总销量{{item.total_num}}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="hittable"
+                 style="background-color: lightsalmon;width: 230px;display: inline-block;position: absolute;margin-top: 15px;margin-left: 15px;height: 165px;">
+                <table style="margin-left:10px; ">
+                    <h2 class="hitice" style="margin-left: 10px;margin-bottom: 10px;margin-top: 15px;">最佳销售员</h2>
+                    {% for item in bestseller %}
+                    <tr>
+                        <td>{{item.seller_id}}</td>
+                        <td>{{item.seller_name}}</td>
+                        <td>总销售额{{item.total_sell}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <a href="/allgoods"><input type="button" value="查看所有商品>>" class="addsell"
+                                       style="height: 50px;width: 150px;font-size: 17px;margin-top: 10px; padding-top: 0px;display: block;margin-left: 265px;margin-bottom: 10px"></a>
+        </div>
+
         <form method="post" action="/sellhome" style="display:none">
             {% csrf_token %}
             输入商品id:
             <input type="text" name="goods_id">
             <input type="submit" value="搜索">
         </form>
-        <a href="/show_all_sell"><input type="button" value="按日期查看所有销售单>>"></a>
-        最新销售数据
+
+        <div style="display: inline-block">
+            <a href="/show_all_sell"><input type="button" value="查看所有销售单>>" class="addsell"
+                                            style="font-size: 20px;height: 40px;"></a>
+        </div>
+        <div style="width: 200px;">
+            <h2 style="font-family: 腾讯体">最新销售订单</h2>
+        </div>
         <table border="1" style="margin: 0 auto;text-align: center;">
             <tr>
                 <th>订单号</th>

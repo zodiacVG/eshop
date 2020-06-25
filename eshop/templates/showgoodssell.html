@@ -6,10 +6,10 @@
 </head>
 <body>
 <div style="background:linear-gradient(to left,#03A9F4,#B3E5FC);height: 200px">
-    <h1 align="center" style="line-height: 200px;font-family:">商品销售记录</h1>
+    <h1 align="center" style="line-height: 150px;font-family: 腾讯体;padding-top: 30px;font-size: 50px;color: #323741;">商品销售记录</h1>
 </div>
 <div>
-    <div style="text-align: center">
+    <div style="text-align: center;margin-top: 20px;margin-bottom: 20px;">
         <form method="post" action="/show_goods_sell">
             {% csrf_token %}
             输入查询起始时间:
@@ -18,7 +18,7 @@
             <input type="date" name="end_time">
             <!--开始选择起始终止时间-->
 
-            <input type="submit" value="搜索">
+            <input type="submit" value="搜索" style="font-family: 腾讯体;font-size: 17px;background-color:  #B3E5FC;border: none;overflow: hidden;">
         </form>
     </div>
 
@@ -46,10 +46,10 @@
         </tr>
         {% endfor %}
     </table>
-    <div style="text-align: center">
-    此段时间总销售量
+    <div style="text-align: center;margin-top: 20px">
+        <h2 style="font-family: 腾讯体">此段时间总销售量:</h2>
     {% for item in num %}
-    <text>{{item.num}}</text>
+    <text style="font-family: 腾讯体;font-size: 50px;">{{item.num}}</text>
     {% endfor %}
     </div>
 </div>

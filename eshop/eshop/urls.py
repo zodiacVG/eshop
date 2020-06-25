@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^allgoods$', view.allgoods),
     url(r'^addsell$', view.addsell),
     url(r'^show_goods_sell/(?P<goods_id>\d+)$', view.show_goods_sell, name='show_goods_sell'),
-    url(r'^modifysell/(?P<sell_id>\d+)$', view.modifysell, name='modifysell'),
+    url(r'^modifysell/(?P<sell_id1>\d+)$', view.modifysell, name='modifysell'),
     url(r'^deletesell/(?P<sell_id>\d+)$', view.deletesell, name='deletesell'),
     url(r'^returngoods$', view.returngoods),
 ]

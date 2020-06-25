@@ -6,15 +6,17 @@
 </head>
 <body>
 <div style="background:linear-gradient(to left,#03A9F4,#B3E5FC);height: 200px">
-    <h1 align="center" style="line-height: 200px;font-family:">所有商品</h1>
+    <h1 align="center" style="line-height: 150px;font-family: 腾讯体;padding-top: 30px;font-size: 50px;color: #323741;">所有商品</h1>
 </div>
 <div>
     <div style="text-align: center">
     <form method="post" action="/allgoods">
         {% csrf_token %}
-        输入商品id:
+       <div style="margin-top: 20px;margin-bottom: 20px">
+           输入商品id:
         <input type="text" name="goods_id">
-        <input type="submit" value="搜索">
+        <input type="submit" value="搜索" style="font-family: 腾讯体;font-size: 17px;background-color:  #B3E5FC;border: none;overflow: hidden;">
+       </div>
     </form>
     </div>
     <table border="1" style="margin: 0 auto;text-align: center;">
